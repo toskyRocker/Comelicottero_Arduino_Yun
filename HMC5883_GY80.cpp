@@ -54,8 +54,6 @@ byte HMC5883::read8(byte address, byte reg)
   #else
     value = Wire.receive();
   #endif  
-  Wire.endTransmission();
-
   return value;
 }
 
@@ -70,9 +68,6 @@ void HMC5883::calcMagData()
   #endif
   Wire.endTransmission();
   Wire.requestFrom((byte)HMC5883_ADDRESS, (byte)6);
-  
-  // Wait around until enough data is available
-  while (Wire.available() < 6);
 
   // Note high before low (different than accel)  
   #if ARDUINO >= 100
